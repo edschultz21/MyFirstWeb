@@ -1,0 +1,10 @@
+﻿<h1>Simple Math</h1>
+
+<input [(ngModel)]="simpleMath.number1" />
+<select [(ngModel)]="operator">
+    <option *ngFor="let operator of operators">{{operator}}</option>
+</select>
+<input [(ngModel)]="simpleMath.number2" />
+= {{ result }}
+<br />
+<button (click)="calculate()">Calculate</button>
