@@ -6,6 +6,12 @@ using System.Linq;
 
 namespace MyFirstWeb.Repositories
 {
+    public class IndexStats
+    {
+        public string Name { get; set; }
+        public string Count { get; set; }
+    }
+
     public class SearchRepository : ISearchRepository
     {
         private ElasticClient _client;
@@ -31,11 +37,11 @@ namespace MyFirstWeb.Repositories
             return new ElasticClient(connectionSettings);
         }
 
-        public List<string> GetAllIndices(string prefix)
+        public List<IndexStats> GetAllIndices(string prefix)
         {
             var allIndices = _client.CatIndices(x => x.AllIndices());
 
-            var myIndices = allIndices.Records.Where(x => x.Index.StartsWith(prefix)).Select(x => x.Index).ToList();
+            var myIndices = allIndices.Records.Where(x => x.Index.StartsWith(prefix)).Select(x => new IndexStats { Name = x.Index, Count = x.DocsCount }).ToList();
 
             return myIndices;
         }

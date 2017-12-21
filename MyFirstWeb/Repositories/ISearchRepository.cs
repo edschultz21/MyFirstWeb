@@ -5,6 +5,6 @@ namespace MyFirstWeb.Repositories
     public interface ISearchRepository
     {
         Dictionary<string, string> GetAllAliases(string prefix);
-        List<string> GetAllIndices(string prefix);
+        List<IndexStats> GetAllIndices(string prefix);
     }
 }

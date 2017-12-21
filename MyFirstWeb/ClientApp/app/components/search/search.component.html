@@ -1,18 +1,17 @@
-﻿<p *ngIf="!count || !results"><em>Loading...</em></p>
+﻿<p *ngIf="!stats"><em>Loading...</em></p>
 
-<div *ngIf="count && results">
+<div *ngIf="stats">
     <h1>Search</h1>
-    Results = {{ results.results }}
-    <br />
-    Count = {{ count.count }}
-    <br />
     <button (click)="getstatistics()">Get Stats</button>
     <div *ngIf="stats">
         <ul class="list-unstyled">
             <li>
                 Indices
                 <ul *ngFor="let index of stats.indices">
-                    <li class="col-md-12">{{ index }}</li>
+                    <li>
+                        <div class="col-md-8">{{ index.name }}</div>
+                        <div class="col-md-2">{{ index.count }}</div>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -22,11 +21,7 @@
                         <div class="col-md-3">{{ alias.key }}</div>
                         <div class="col-md-9">{{ alias.value }}</div>
                     </li>
-                    <!--<li class="col-sm-12">{{ alias.value }}</li>-->
                 </ul>
-                <!--<ul *ngFor="let alias of stats.aliases" class="row list-unstyled">
-                    <li class="col-sm-12">{{ alias.value }}</li>
-                </ul>-->
             </li>
         </ul>
     </div>
