@@ -8,8 +8,9 @@ import { Http } from '@angular/http';
 export class SearchComponent {
     public results: SearchData;
     public count: string;
+    public stats: SearchStats;
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
+    constructor(@Inject(Http) private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         http.get(baseUrl + 'api/Search/Results').subscribe(result => {
             this.results = result.json();
         }, error => console.error(error));
@@ -17,8 +18,26 @@ export class SearchComponent {
             this.count = result.json();
         }, error => console.error(error));
     }
+
+    public getstatistics() {
+        this.http.get(this.baseUrl + 'api/Search/Stats').subscribe(result => {
+            this.stats = result.json();
+        }, error => console.error(error));
+
+        var ezs = this.stats;
+    }
 }
 
 interface SearchData {
     results: string;
+}
+
+// EZSTODO - Figure out how to pass dictionaries correctly.
+interface DictionaryEntry {
+    key: string;
+    value: string;
+}
+interface SearchStats {
+    indices: string[];
+    aliases: DictionaryEntry[];
 }

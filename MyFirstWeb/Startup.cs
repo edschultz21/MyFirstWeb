@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyFirstWeb.Repositories;
 
 namespace MyFirstWeb
 {
@@ -24,6 +25,7 @@ namespace MyFirstWeb
         {
             services.AddMvc();
             services.AddCors();
+            services.AddSingleton(typeof(ISearchRepository), typeof(SearchRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
